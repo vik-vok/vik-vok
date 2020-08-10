@@ -52,7 +52,7 @@ paths:
   /users/{userId}:
     get:
       tags:
-      - user
+      - users
       summary: get user information
       operationId: getUser
       produces:
@@ -74,7 +74,7 @@ paths:
             type: string      
     put:
       tags:
-      - user
+      - users
       summary: update user information
       operationId: updateUser
       consumes:
@@ -100,10 +100,11 @@ paths:
         "400":
           description: Invalid username supplied
         "404":
-          description: User not found   
+          description: User not found
+        
     delete:
       tags:
-      - user
+      - users
       summary: Delete user
       description: This can only be done by the logged in user.
       operationId: deleteUser
@@ -205,7 +206,7 @@ paths:
         type: string
       - in: body
         name: body
-        description: Updated user object
+        description: Updated original voice object
         required: true
         schema:
           type: string #?
@@ -330,6 +331,82 @@ paths:
           description: User not found      
       
       
-      
+  /comments:
+    post:
+      tags:
+      - comments
+      summary: Add comment
+      operationId: commentAdd
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: comment object
+        required: true
+        schema:
+          type: object
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/comment_add
+        protocol: h2
+      responses:
+        "405":
+          description: Invalid input
+  
+  /comments/{commentId}:
+    put:
+      tags:
+      - comments
+      summary: update comment
+      operationId: updateComment
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: commentId
+        in: path
+        description: Id that needs to be updated
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: Updated comment object
+        required: true
+        schema:
+          type: string #?
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/comment_update
+        protocol: h2
+      responses:
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: User not found
+        
+    delete:
+      tags:
+      - comments
+      summary: Delete comment
+      description: This can only be done by the comment owner.
+      operationId: deleteComment
+      produces:
+      - application/json
+      parameters:
+      - name: commentId
+        in: path
+        description: ID that needs to be deleted
+        required: true
+        type: string
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/comment_delete
+        protocol: h2
+      responses:
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: Comment found  
       
       
