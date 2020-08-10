@@ -2,3 +2,7 @@
 	path = user
 	url = https://github.com/vik-vok/user.git
 	branch = master
+[submodule "voice"]
+	path = voice
+	url = https://github.com/vik-vok/voice.git
+	branch = master
