@@ -1,0 +1,219 @@
+swagger: '2.0'
+info:
+  title: Cloud Endpoints + GCF
+  description: Sample API on Cloud Endpoints with a Google Cloud Functions backend
+  version: 1.0.0
+host: vikvok-anldg2io3q-ew.a.run.app
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  /users:
+    get:
+      tags:
+      - users
+      summary: Users list/leaderboard
+      operationId: usersList
+      produces:
+      - application/json
+      parameters: []
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/users_handler
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+    post:
+      tags:
+      - users
+      summary: Registration
+      operationId: userRegister
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: user object
+        required: true
+        schema:
+          type: object
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/user_register
+        protocol: h2
+      responses:
+        "405":
+          description: Invalid input
+      
+  /users/{userId}:
+    get:
+      tags:
+      - user
+      summary: get user information
+      operationId: getUser
+      produces:
+      - application/json
+      parameters:
+      - name: userId
+        in: path
+        description: ID of a user
+        required: true
+        type: integer
+        format: int64
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/user_handler
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string      
+    put:
+      tags:
+      - user
+      summary: update user information
+      operationId: updateUser
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: userId
+        in: path
+        description: name that needs to be updated
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: Updated user object
+        required: true
+        schema:
+          type: string #?
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/user_update
+        protocol: h2
+      responses:
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: User not found
+        
+    delete:
+      tags:
+      - user
+      summary: Delete user
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      produces:
+      - application/json
+      parameters:
+      - name: userId
+        in: path
+        description: The name that needs to be deleted
+        required: true
+        type: string
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/user_delete
+        protocol: h2
+      responses:
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: User not found
+
+  /originalvoices:
+    get:
+      tags:
+      - voices
+      summary: List of original voices
+      operationId: origVoicesList
+      produces: application/json
+      parameters: []
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voices_handler
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+    post:
+      tags:
+      - voices
+      summary: Add original voice
+      operationId: voiceOrigAdd
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: original voice object
+        required: true
+        schema:
+          type: object
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voice_add
+        protocol: h2
+      responses:
+        "405":
+          description: Invalid input
+  
+  /originalvoices/{voiceId}:
+    get:
+      tags:
+      - voices
+      summary: get original voice by id
+      operationId: originalVoicesList
+      produces: application/json
+      parameters:
+      - name: voiceId
+        in: path
+        description: ID of a original voice
+        required: true
+        type: integer
+        format: int64
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voices_handler
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+    post:
+      tags:
+      - voices
+      summary: Add original voice
+      operationId: voiceOrigAdd
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: voice object
+        required: true
+        schema:
+          type: object
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voice_add
+        protocol: h2
+      responses:
+        "405":
+          description: Invalid input  
+      
+      
+      
+      
+      
+      
+      
+      
+      
