@@ -128,10 +128,11 @@ paths:
   /originalvoices:
     get:
       tags:
-      - voices
+      - original voices
       summary: List of original voices
       operationId: origVoicesList
-      produces: application/json
+      produces: 
+      - application/json
       parameters: []
       x-google-backend:
         address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voices_handler
@@ -143,7 +144,7 @@ paths:
             type: string
     post:
       tags:
-      - voices
+      - original voices
       summary: Add original voice
       operationId: voiceOrigAdd
       consumes:
@@ -167,10 +168,11 @@ paths:
   /originalvoices/{voiceId}:
     get:
       tags:
-      - voices
+      - original voices
       summary: get original voice by id
-      operationId: originalVoicesList
-      produces: application/json
+      operationId: originalVoice
+      produces:
+      - application/json
       parameters:
       - name: voiceId
         in: path
@@ -186,11 +188,83 @@ paths:
           description: A successful response
           schema:
             type: string
+
+    put:
+      tags:
+      - original voices
+      summary: update voice title/name
+      operationId: updateVoice
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: voiceId
+        in: path
+        description: Id that needs to be updated
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: Updated user object
+        required: true
+        schema:
+          type: string #?
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/orignial_voice_update
+        protocol: h2
+      responses:
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: User not found
+        
+    delete:
+      tags:
+      - original voices
+      summary: Delete original voice
+      description: This can only be done by the voice owner.
+      operationId: deleteOriginalVoice
+      produces:
+      - application/json
+      parameters:
+      - name: voiceId
+        in: path
+        description: ID that needs to be deleted
+        required: true
+        type: string
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voice_delete
+        protocol: h2
+      responses:
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: User not found      
+      
+      
+  /recordedvoices:
+    get:
+      tags:
+      - recorded voices
+      summary: List of recorded voices
+      operationId: recordedVoicesList
+      produces: 
+      - application/json
+      parameters: []
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded_voices_handler
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
     post:
       tags:
-      - voices
-      summary: Add original voice
-      operationId: voiceOrigAdd
+      - recorded voices
+      summary: Add recorded voice
+      operationId: voiceRecordAdd
       consumes:
       - application/json
       produces:
@@ -198,20 +272,63 @@ paths:
       parameters:
       - in: body
         name: body
-        description: voice object
+        description: original voice object
         required: true
         schema:
           type: object
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voice_add
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded_voice_add
         protocol: h2
       responses:
         "405":
-          description: Invalid input  
-      
-      
-      
-      
+          description: Invalid input
+  
+  /recordedvoices/{voiceId}:
+    get:
+      tags:
+      - recorded voices
+      summary: get recorded voice by id
+      operationId: recordedVoice
+      produces:
+      - application/json
+      parameters:
+      - name: voiceId
+        in: path
+        description: ID of a recorded voice
+        required: true
+        type: integer
+        format: int64
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded_voices_handler
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+        
+    delete:
+      tags:
+      - recorded voices
+      summary: Delete recorded voice
+      description: This can only be done by the voice owner.
+      operationId: deleteRecordedVoice
+      produces:
+      - application/json
+      parameters:
+      - name: voiceId
+        in: path
+        description: ID that needs to be deleted
+        required: true
+        type: string
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded_voice_delete
+        protocol: h2
+      responses:
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: User not found      
       
       
       
