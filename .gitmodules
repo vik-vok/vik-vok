@@ -6,3 +6,7 @@
 	path = voice
 	url = https://github.com/vik-vok/voice.git
 	branch = master
+[submodule "comment"]
+	path = comment
+	url = https://github.com/vik-vok/comment
+	branch = master
