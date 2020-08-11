@@ -48,7 +48,7 @@ paths:
       responses:
         "405":
           description: Invalid input
-      
+
   /users/{userId}:
     get:
       tags:
@@ -100,8 +100,7 @@ paths:
         "400":
           description: Invalid username supplied
         "404":
-          description: User not found
-        
+          description: User not found  
     delete:
       tags:
       - users
@@ -164,7 +163,7 @@ paths:
       responses:
         "405":
           description: Invalid input
-  
+
   /originalvoices/{voiceId}:
     get:
       tags:
@@ -188,7 +187,6 @@ paths:
           description: A successful response
           schema:
             type: string
-
     put:
       tags:
       - original voices
@@ -217,8 +215,7 @@ paths:
         "400":
           description: Invalid username supplied
         "404":
-          description: User not found
-        
+          description: User not found   
     delete:
       tags:
       - original voices
@@ -241,7 +238,6 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found      
-      
       
   /recordedvoices:
     get:
@@ -282,7 +278,7 @@ paths:
       responses:
         "405":
           description: Invalid input
-  
+
   /recordedvoices/{voiceId}:
     get:
       tags:
@@ -306,7 +302,6 @@ paths:
           description: A successful response
           schema:
             type: string
-        
     delete:
       tags:
       - recorded voices
@@ -329,8 +324,7 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found      
-      
-      
+
   /comments:
     post:
       tags:
@@ -354,7 +348,7 @@ paths:
       responses:
         "405":
           description: Invalid input
-  
+
   /comments/{commentId}:
     put:
       tags:
@@ -385,7 +379,6 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found
-        
     delete:
       tags:
       - comments
@@ -408,5 +401,3 @@ paths:
           description: Invalid username supplied
         "404":
           description: Comment found  
-      
-      
