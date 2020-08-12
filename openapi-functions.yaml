@@ -12,7 +12,7 @@ paths:
   /users:
     get:
       tags:
-      - users
+      - Users
       summary: Users list/leaderboard
       operationId: usersList
       produces:
@@ -25,10 +25,10 @@ paths:
         '200':
           description: A successful response
           schema:
-            type: string
+            $ref: '#/definitions/ApiResponse'  
     post:
       tags:
-      - users
+      - Users
       summary: Registration
       operationId: userRegister
       consumes:
@@ -41,18 +41,18 @@ paths:
         description: user object
         required: true
         schema:
-          type: object
+          $ref: '#/definitions/User'
       x-google-backend:
         address: https://europe-west1-speech-similarity.cloudfunctions.net/user_register
         protocol: h2
       responses:
         "405":
           description: Invalid input
-
+      
   /users/{userId}:
     get:
       tags:
-      - users
+      - Users
       summary: get user information
       operationId: getUser
       produces:
@@ -71,10 +71,10 @@ paths:
         '200':
           description: A successful response
           schema:
-            type: string      
+            $ref: '#/definitions/ApiResponse'        
     put:
       tags:
-      - users
+      - Users
       summary: update user information
       operationId: updateUser
       consumes:
@@ -92,7 +92,7 @@ paths:
         description: Updated user object
         required: true
         schema:
-          type: string #?
+          $ref: '#/definitions/User'
       x-google-backend:
         address: https://europe-west1-speech-similarity.cloudfunctions.net/user_update
         protocol: h2
@@ -100,10 +100,13 @@ paths:
         "400":
           description: Invalid username supplied
         "404":
-          description: User not found  
+          description: User not found
+      security:
+        - firebase: []
+        
     delete:
       tags:
-      - users
+      - Users
       summary: Delete user
       description: This can only be done by the logged in user.
       operationId: deleteUser
@@ -123,11 +126,61 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found
+      security:
+        - firebase: []
+        
+  /users/{userId}/recordedvoices:
+    get:
+      tags:
+      - Users
+      summary: get user recorded voices
+      operationId: getUserRecordedVoices
+      produces:
+      - application/json
+      parameters:
+      - name: userId
+        in: path
+        description: ID of a user
+        required: true
+        type: integer
+        format: int64
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/rec_users_voices
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/ApiResponse'  
+
+  /users/{userId}/originalvoices:
+    get:
+      tags:
+      - Users
+      summary: get user original voices
+      operationId: getUserOrigVoices
+      produces:
+      - application/json
+      parameters:
+      - name: userId
+        in: path
+        description: ID of a user
+        required: true
+        type: integer
+        format: int64
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/orig_users_voices
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/ApiResponse'    
 
   /originalvoices:
     get:
       tags:
-      - original voices
+      - Original Voices
       summary: List of original voices
       operationId: origVoicesList
       produces: 
@@ -140,10 +193,10 @@ paths:
         '200':
           description: A successful response
           schema:
-            type: string
+            $ref: '#/definitions/ApiResponse'  
     post:
       tags:
-      - original voices
+      - Original Voices
       summary: Add original voice
       operationId: voiceOrigAdd
       consumes:
@@ -156,18 +209,20 @@ paths:
         description: original voice object
         required: true
         schema:
-          type: object
+          $ref: '#/definitions/OriginalVoice'
       x-google-backend:
         address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voice_add
         protocol: h2
       responses:
         "405":
           description: Invalid input
-
+      security:
+        - firebase: []
+  
   /originalvoices/{voiceId}:
     get:
       tags:
-      - original voices
+      - Original Voices
       summary: get original voice by id
       operationId: originalVoice
       produces:
@@ -186,10 +241,11 @@ paths:
         '200':
           description: A successful response
           schema:
-            type: string
+            $ref: '#/definitions/ApiResponse'  
+
     put:
       tags:
-      - original voices
+      - Original Voices
       summary: update voice title/name
       operationId: updateVoice
       consumes:
@@ -207,7 +263,7 @@ paths:
         description: Updated original voice object
         required: true
         schema:
-          type: string #?
+          $ref: '#/definitions/OriginalVoice'
       x-google-backend:
         address: https://europe-west1-speech-similarity.cloudfunctions.net/orignial_voice_update
         protocol: h2
@@ -215,10 +271,13 @@ paths:
         "400":
           description: Invalid username supplied
         "404":
-          description: User not found   
+          description: User not found
+      security:
+        - firebase: []
+        
     delete:
       tags:
-      - original voices
+      - Original Voices
       summary: Delete original voice
       description: This can only be done by the voice owner.
       operationId: deleteOriginalVoice
@@ -237,12 +296,62 @@ paths:
         "400":
           description: Invalid username supplied
         "404":
-          description: User not found      
-      
+          description: User not found  
+      security:
+        - firebase: []
+
+  /originalvoices/{voiceId}/comments:
+    get:
+      tags:
+      - Original Voices
+      summary: get original voice's comments
+      operationId: getOrigVoiceComments
+      produces:
+      - application/json
+      parameters:
+      - name: voiceId
+        in: path
+        description: ID of a voice
+        required: true
+        type: integer
+        format: int64
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voice_comments
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/ApiResponse'   
+  
+  /originalvoices/{voiceId}/voices:
+    get:
+      tags:
+      - Original Voices
+      summary: get original voice's recorded voices list
+      operationId: getOrigVoiceVoices
+      produces:
+      - application/json
+      parameters:
+      - name: voiceId
+        in: path
+        description: ID of a voice
+        required: true
+        type: integer
+        format: int654
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voice_voices
+        protocol: hw
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/ApiResponse'  
+        
   /recordedvoices:
     get:
       tags:
-      - recorded voices
+      - Recorded Voices
       summary: List of recorded voices
       operationId: recordedVoicesList
       produces: 
@@ -255,10 +364,10 @@ paths:
         '200':
           description: A successful response
           schema:
-            type: string
+            $ref: '#/definitions/ApiResponse'  
     post:
       tags:
-      - recorded voices
+      - Recorded Voices
       summary: Add recorded voice
       operationId: voiceRecordAdd
       consumes:
@@ -271,18 +380,20 @@ paths:
         description: original voice object
         required: true
         schema:
-          type: object
+          $ref: '#/definitions/RecordedVoice'
       x-google-backend:
         address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded_voice_add
         protocol: h2
       responses:
         "405":
           description: Invalid input
-
+      security:
+        - firebase: []
+  
   /recordedvoices/{voiceId}:
     get:
       tags:
-      - recorded voices
+      - Recorded Voices
       summary: get recorded voice by id
       operationId: recordedVoice
       produces:
@@ -301,10 +412,11 @@ paths:
         '200':
           description: A successful response
           schema:
-            type: string
+            $ref: '#/definitions/ApiResponse'  
+
     delete:
       tags:
-      - recorded voices
+      - Recorded Voices
       summary: Delete recorded voice
       description: This can only be done by the voice owner.
       operationId: deleteRecordedVoice
@@ -324,11 +436,38 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found      
-
+      security:
+        - firebase: []
+        
+  /recordedvoices/{voiceId}/comments:
+    get:
+      tags:
+      - Recorded Voices
+      summary: get recorded voice's comments
+      operationId: getRecVoiceComments
+      produces:
+      - application/json
+      parameters:
+      - name: voiceId
+        in: path
+        description: ID of a voice
+        required: true
+        type: integer
+        format: int64
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded_voice_comments
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/ApiResponse'        
+      
+      
   /comments:
     post:
       tags:
-      - comments
+      - Comments
       summary: Add comment
       operationId: commentAdd
       consumes:
@@ -341,18 +480,20 @@ paths:
         description: comment object
         required: true
         schema:
-          type: object
+          $ref: '#/definitions/Comment'
       x-google-backend:
         address: https://europe-west1-speech-similarity.cloudfunctions.net/comment_add
         protocol: h2
       responses:
         "405":
           description: Invalid input
-
+      security:
+        - firebase: []
+  
   /comments/{commentId}:
     put:
       tags:
-      - comments
+      - Comments
       summary: update comment
       operationId: updateComment
       consumes:
@@ -370,7 +511,7 @@ paths:
         description: Updated comment object
         required: true
         schema:
-          type: string #?
+          $ref: '#/definitions/Comment'
       x-google-backend:
         address: https://europe-west1-speech-similarity.cloudfunctions.net/comment_update
         protocol: h2
@@ -379,9 +520,12 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found
+      security:
+        - firebase: []
+        
     delete:
       tags:
-      - comments
+      - Comments
       summary: Delete comment
       description: This can only be done by the comment owner.
       operationId: deleteComment
@@ -401,3 +545,104 @@ paths:
           description: Invalid username supplied
         "404":
           description: Comment found  
+      security:
+        - firebase: []
+      
+  
+securityDefinitions:
+  firebase:
+    authorizationUrl: "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[AIzaSyAcXoIXLzqbLBmRlSOlcf5MEKZO_vA2BOE]"
+    flow: "implicit"
+    type: "oauth2"
+    # Replace YOUR-PROJECT-ID with your project ID
+    x-google-issuer: "https://securetoken.google.com/YOUR-PROJECT-ID"
+    x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/metadata/x509/securetoken@system.gserviceaccount.com"
+    x-google-audiences: speech-similarity
+    
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      username:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      userStatus:
+        type: integer
+        format: int32
+        description: User Status
+    xml:
+      name: User
+  OriginalVoice:
+    type: object
+    required:
+    - name
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      description:
+        type: string
+      voiceUrl:
+        type: string
+      userId:
+        type: integer
+        format: int64
+    xml:
+      name: OriginalVoice
+
+  RecordedVoice:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      parentId:
+        type: integer
+        format: int64
+      voiceUrl:
+        type: string
+      userId:
+        type: integer
+        format: int64
+    xml:
+      name: RecordedVoice
+      
+  Comment:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      comment:
+        type: string
+      voiceId:
+        type: integer
+        format: int64
+      userId:
+        type: integer
+        format: int64
+    xml:
+      name: Comment   
+      
+  ApiResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      type:
+        type: string
+      message:
+        type: string
