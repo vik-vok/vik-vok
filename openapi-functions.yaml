@@ -491,6 +491,29 @@ paths:
         - firebase: []
   
   /comments/{commentId}:
+    get:
+      tags:
+      - Comments
+      summary: get comment by id
+      operationId: getComment
+      produces:
+      - application/json
+      parameters:
+      - name: commentId
+        in: path
+        description: ID of a comment
+        required: true
+        type: integer
+        format: int64
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/get_comment
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/ApiResponse'      
+  
     put:
       tags:
       - Comments
