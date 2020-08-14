@@ -19,7 +19,7 @@ paths:
       - application/json
       parameters: []
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/users_handler
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/users-get-all
         protocol: h2
       responses:
         '200':
@@ -43,7 +43,7 @@ paths:
         schema:
           $ref: '#/definitions/User'
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/user_register
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/user-register
         protocol: h2
       responses:
         "405":
@@ -65,7 +65,7 @@ paths:
         type: integer
         format: int64
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/user_handler
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/user-get
         protocol: h2
       responses:
         '200':
@@ -94,7 +94,7 @@ paths:
         schema:
           $ref: '#/definitions/User'
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/user_update
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/user-update
         protocol: h2
       responses:
         "400":
@@ -119,7 +119,7 @@ paths:
         required: true
         type: string
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/user_delete
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/user-delete
         protocol: h2
       responses:
         "400":
@@ -145,8 +145,7 @@ paths:
         type: integer
         format: int64
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/rec_users_voices
-        protocol: h2
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/get-users-recorded-voices
       responses:
         '200':
           description: A successful response
@@ -169,7 +168,7 @@ paths:
         type: integer
         format: int64
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/orig_users_voices
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/get-users-original-voices
         protocol: h2
       responses:
         '200':
@@ -187,7 +186,7 @@ paths:
       - application/json
       parameters: []
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voices_handler
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/original-voice-get-all
         protocol: h2
       responses:
         '200':
@@ -211,7 +210,7 @@ paths:
         schema:
           $ref: '#/definitions/OriginalVoice'
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voice_add
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/original-voice-create
         protocol: h2
       responses:
         "405":
@@ -235,7 +234,7 @@ paths:
         type: integer
         format: int64
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voices_handler
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/original-voice-get
         protocol: h2
       responses:
         '200':
@@ -265,7 +264,7 @@ paths:
         schema:
           $ref: '#/definitions/OriginalVoice'
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/orignial_voice_update
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/orignial-voice-update
         protocol: h2
       responses:
         "400":
@@ -290,7 +289,7 @@ paths:
         required: true
         type: string
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voice_delete
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/original-voice-delete
         protocol: h2
       responses:
         "400":
@@ -316,7 +315,7 @@ paths:
         type: integer
         format: int64
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voice_comments
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/original-voice-comments
         protocol: h2
       responses:
         '200':
@@ -340,8 +339,8 @@ paths:
         type: integer
         format: int654
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/original_voice_voices
-        protocol: hw
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/original-voice-voices
+        protocol: h2
       responses:
         '200':
           description: A successful response
@@ -358,7 +357,7 @@ paths:
       - application/json
       parameters: []
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded_voices_handler
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded-voice-get-all
         protocol: h2
       responses:
         '200':
@@ -382,7 +381,7 @@ paths:
         schema:
           $ref: '#/definitions/RecordedVoice'
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded_voice_add
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded-voice-create
         protocol: h2
       responses:
         "405":
@@ -406,7 +405,7 @@ paths:
         type: integer
         format: int64
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded_voices_handler
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded-voice-get
         protocol: h2
       responses:
         '200':
@@ -429,7 +428,7 @@ paths:
         required: true
         type: string
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded_voice_delete
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded-voice-delete
         protocol: h2
       responses:
         "400":
@@ -455,7 +454,7 @@ paths:
         type: integer
         format: int64
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded_voice_comments
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded-voice-comments
         protocol: h2
       responses:
         '200':
@@ -482,7 +481,7 @@ paths:
         schema:
           $ref: '#/definitions/Comment'
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/comment_add
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/comment-create
         protocol: h2
       responses:
         "405":
@@ -506,7 +505,7 @@ paths:
         type: integer
         format: int64
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/get_comment
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/comment-get
         protocol: h2
       responses:
         '200':
@@ -536,7 +535,7 @@ paths:
         schema:
           $ref: '#/definitions/Comment'
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/comment_update
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/comment-update
         protocol: h2
       responses:
         "400":
@@ -561,7 +560,7 @@ paths:
         required: true
         type: string
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/comment_delete
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/comment-delete
         protocol: h2
       responses:
         "400":
@@ -648,14 +647,14 @@ definitions:
       id:
         type: integer
         format: int64
-      comment:
+      voiceID:
+        type: integer
+        format: int64
+      userID:
+        type: integer
+        format: int64
+      text:
         type: string
-      voiceId:
-        type: integer
-        format: int64
-      userId:
-        type: integer
-        format: int64
     xml:
       name: Comment   
       
