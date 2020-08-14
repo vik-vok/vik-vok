@@ -585,7 +585,7 @@ definitions:
   User:
     type: object
     properties:
-      id:
+      userId:
         type: integer
         format: int64
       username:
@@ -609,7 +609,7 @@ definitions:
     required:
     - name
     properties:
-      id:
+      voiceId:
         type: integer
         format: int64
       name:
@@ -627,7 +627,7 @@ definitions:
   RecordedVoice:
     type: object
     properties:
-      id:
+      voiceId:
         type: integer
         format: int64
       parentId:
