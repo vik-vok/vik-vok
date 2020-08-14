@@ -462,7 +462,6 @@ paths:
           schema:
             $ref: '#/definitions/ApiResponse'        
       
-      
   /comments:
     post:
       tags:
@@ -570,7 +569,6 @@ paths:
       security:
         - firebase: []
       
-  
 securityDefinitions:
   firebase:
     authorizationUrl: "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[AIzaSyAcXoIXLzqbLBmRlSOlcf5MEKZO_vA2BOE]"
