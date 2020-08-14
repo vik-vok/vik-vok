@@ -498,7 +498,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: commentId
+      - name: id
         in: path
         description: ID of a comment
         required: true
@@ -523,7 +523,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: commentId
+      - name: id
         in: path
         description: Id that needs to be updated
         required: true
@@ -554,7 +554,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: commentId
+      - name: id
         in: path
         description: ID that needs to be deleted
         required: true
