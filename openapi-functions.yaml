@@ -186,7 +186,7 @@ paths:
       - application/json
       parameters: []
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/original-voice-get-all
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/voice-original-get-all
         protocol: h2
       responses:
         '200':
@@ -210,7 +210,7 @@ paths:
         schema:
           $ref: '#/definitions/OriginalVoice'
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/original-voice-create
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/voice-original-create
         protocol: h2
       responses:
         "405":
@@ -234,7 +234,7 @@ paths:
         type: integer
         format: int64
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/original-voice-get
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/voice-original-get
         protocol: h2
       responses:
         '200':
@@ -264,7 +264,7 @@ paths:
         schema:
           $ref: '#/definitions/OriginalVoice'
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/orignial-voice-update
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/voice-original-update
         protocol: h2
       responses:
         "400":
@@ -289,7 +289,7 @@ paths:
         required: true
         type: string
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/original-voice-delete
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/voice-original-delete
         protocol: h2
       responses:
         "400":
@@ -357,7 +357,7 @@ paths:
       - application/json
       parameters: []
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded-voice-get-all
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/voice-recorded-get-all
         protocol: h2
       responses:
         '200':
@@ -381,7 +381,7 @@ paths:
         schema:
           $ref: '#/definitions/RecordedVoice'
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded-voice-create
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/voice-recorded-create
         protocol: h2
       responses:
         "405":
@@ -405,7 +405,7 @@ paths:
         type: integer
         format: int64
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded-voice-get
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/voice-recorded-get
         protocol: h2
       responses:
         '200':
@@ -428,7 +428,7 @@ paths:
         required: true
         type: string
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded-voice-delete
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/voice-recorded-delete
         protocol: h2
       responses:
         "400":
