@@ -386,8 +386,6 @@ paths:
       responses:
         "405":
           description: Invalid input
-      security:
-        - firebase: []
   
   /recordedvoices/{voiceId}:
     get:
