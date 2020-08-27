@@ -148,7 +148,7 @@ paths:
         type: integer
         format: int64
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/get-users-recorded-voices
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/users-recorded-voices
       responses:
         '200':
           description: A successful response
@@ -171,7 +171,7 @@ paths:
         type: integer
         format: int64
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/get-users-original-voices
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/users-original-voices
         protocol: h2
       responses:
         '200':
@@ -457,14 +457,37 @@ paths:
         type: integer
         format: int64
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded-voice-comments
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/voice-recorded-comments
         protocol: h2
       responses:
         '200':
           description: A successful response
           schema:
-            $ref: '#/definitions/ApiResponse'        
-      
+            $ref: '#/definitions/ApiResponse'      
+
+  /recordedvoices/original/{parentId}:
+    get:
+      tags:
+      - Recorded Voices
+      summary: get recorded voice's by parent id
+      operationId: getRecVoiceByParent
+      produces:
+      - application/json
+      parameters:
+      - name: parentId
+        in: path
+        description: ID of a parent original voice
+        required: true
+        type: integer
+        format: int64
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/voice-recorded-by-original
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/ApiResponse'         
   /comments:
     post:
       tags:
