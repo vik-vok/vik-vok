@@ -4,6 +4,9 @@ info:
   description: Sample API on Cloud Endpoints with a Google Cloud Functions backend
   version: 1.0.0
 host: vikvok-anldg2io3q-ew.a.run.app
+x-google-endpoints:
+  - name: vikvok-anldg2io3q-ew.a.run.app
+    allowCors: True
 schemes:
   - https
 produces:
@@ -101,8 +104,8 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found
-      security:
-        - firebase: []
+      # security:
+      #   - firebase: []
         
     delete:
       tags:
@@ -126,8 +129,8 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found
-      security:
-        - firebase: []
+      # security:
+      #   - firebase: []
         
   /users/{userId}/recordedvoices:
     get:
@@ -215,8 +218,8 @@ paths:
       responses:
         "405":
           description: Invalid input
-      security:
-        - firebase: []
+      # security:
+      #   - firebase: []
   
   /originalvoices/{voiceId}:
     get:
@@ -271,8 +274,8 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found
-      security:
-        - firebase: []
+      # security:
+      #   - firebase: []
         
     delete:
       tags:
@@ -296,8 +299,8 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found  
-      security:
-        - firebase: []
+      # security:
+      #   - firebase: []
 
   /originalvoices/{voiceId}/comments:
     get:
@@ -315,7 +318,7 @@ paths:
         type: integer
         format: int64
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/original-voice-comments
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/voice-original-comments
         protocol: h2
       responses:
         '200':
@@ -339,7 +342,7 @@ paths:
         type: integer
         format: int654
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/original-voice-voices
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/voice-original-voices
         protocol: h2
       responses:
         '200':
@@ -386,6 +389,8 @@ paths:
       responses:
         "405":
           description: Invalid input
+      # security:
+      #   - firebase: []
   
   /recordedvoices/{voiceId}:
     get:
@@ -433,8 +438,8 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found      
-      security:
-        - firebase: []
+      # security:
+      #   - firebase: []
         
   /recordedvoices/{voiceId}/comments:
     get:
@@ -483,8 +488,8 @@ paths:
       responses:
         "405":
           description: Invalid input
-      security:
-        - firebase: []
+      # security:
+      #   - firebase: []
   
   /comments/{commentId}:
     get:
@@ -495,7 +500,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: id
+      - name: commentId
         in: path
         description: ID of a comment
         required: true
@@ -520,7 +525,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: id
+      - name: commentId
         in: path
         description: Id that needs to be updated
         required: true
@@ -539,8 +544,8 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found
-      security:
-        - firebase: []
+      # security:
+      #   - firebase: []
         
     delete:
       tags:
@@ -551,7 +556,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: id
+      - name: commentId
         in: path
         description: ID that needs to be deleted
         required: true
@@ -564,8 +569,56 @@ paths:
           description: Invalid username supplied
         "404":
           description: Comment found  
-      security:
-        - firebase: []
+      # security:
+      #   - firebase: []
+  
+  /comments/original/{voiceId}:
+    get:
+      tags:
+      - Comments
+      summary: get comment by original voice's id
+      operationId: getOriginalVoiceComment
+      produces:
+      - application/json
+      parameters:
+      - name: voiceId
+        in: path
+        description: voice ID
+        required: true
+        type: integer
+        format: int64
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/original-voice-comments
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/ApiResponse'
+            
+  /comments/recorded/{voiceId}:
+    get:
+      tags:
+      - Comments
+      summary: get comment by recorded voice's id
+      operationId: getRecordedVoiceComment
+      produces:
+      - application/json
+      parameters:
+      - name: voiceId
+        in: path
+        description: voice ID
+        required: true
+        type: integer
+        format: int64
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/recorded-voice-comments
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/ApiResponse' 
       
 securityDefinitions:
   firebase:
