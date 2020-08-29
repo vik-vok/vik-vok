@@ -1,0 +1,2 @@
+init:
+	./workflows/script.sh

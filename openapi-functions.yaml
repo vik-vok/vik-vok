@@ -301,7 +301,7 @@ paths:
       # security:
       #   - firebase: []
 
-  /originalvoices/{originalVoiceId}/comments:
+  /originalvoices/{voiceId}/comments:
     get:
       tags:
       - Original Voices
@@ -310,7 +310,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: originalVoiceId
+      - name: voiceId
         in: path
         description: ID of a voice
         required: true
@@ -440,7 +440,7 @@ paths:
       # security:
       #   - firebase: []
         
-  /recordedvoices/{recordedVoiceId}/comments:
+  /recordedvoices/{voiceId}/comments:
     get:
       tags:
       - Recorded Voices
@@ -449,7 +449,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: recordedVoiceId
+      - name: voiceId
         in: path
         description: ID of a voice
         required: true
