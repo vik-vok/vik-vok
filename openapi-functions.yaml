@@ -105,8 +105,7 @@ paths:
         "404":
           description: User not found
       # security:
-      #   - firebase: []
-        
+      #   - firebase: []       
     delete:
       tags:
       - Users
@@ -221,7 +220,7 @@ paths:
       # security:
       #   - firebase: []
   
-  /originalvoices/{voiceId}:
+  /originalvoices/{originalVoiceId}:
     get:
       tags:
       - Original Voices
@@ -230,7 +229,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: voiceId
+      - name: originalVoiceId
         in: path
         description: ID of a original voice
         required: true
@@ -255,7 +254,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: voiceId
+      - name: originalVoiceId
         in: path
         description: Id that needs to be updated
         required: true
@@ -286,7 +285,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: voiceId
+      - name: originalVoiceId
         in: path
         description: ID that needs to be deleted
         required: true
@@ -302,7 +301,7 @@ paths:
       # security:
       #   - firebase: []
 
-  /originalvoices/{voiceId}/comments:
+  /originalvoices/{originalVoiceId}/comments:
     get:
       tags:
       - Original Voices
@@ -311,7 +310,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: voiceId
+      - name: originalVoiceId
         in: path
         description: ID of a voice
         required: true
@@ -326,7 +325,7 @@ paths:
           schema:
             $ref: '#/definitions/ApiResponse'   
   
-  /originalvoices/{voiceId}/voices:
+  /originalvoices/{originalVoiceId}/voices:
     get:
       tags:
       - Original Voices
@@ -335,7 +334,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: voiceId
+      - name: originalVoiceId
         in: path
         description: ID of a voice
         required: true
@@ -392,7 +391,7 @@ paths:
       # security:
       #   - firebase: []
   
-  /recordedvoices/{voiceId}:
+  /recordedvoices/{recordedVoiceId}:
     get:
       tags:
       - Recorded Voices
@@ -401,7 +400,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: voiceId
+      - name: recordedVoiceId
         in: path
         description: ID of a recorded voice
         required: true
@@ -425,7 +424,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: voiceId
+      - name: recordedVoiceId
         in: path
         description: ID that needs to be deleted
         required: true
@@ -441,7 +440,7 @@ paths:
       # security:
       #   - firebase: []
         
-  /recordedvoices/{voiceId}/comments:
+  /recordedvoices/{recordedVoiceId}/comments:
     get:
       tags:
       - Recorded Voices
@@ -450,7 +449,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: voiceId
+      - name: recordedVoiceId
         in: path
         description: ID of a voice
         required: true
@@ -465,7 +464,7 @@ paths:
           schema:
             $ref: '#/definitions/ApiResponse'      
 
-  /recordedvoices/original/{parentId}:
+  /recordedvoices/original/{originalVoiceId}:
     get:
       tags:
       - Recorded Voices
@@ -474,7 +473,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: parentId
+      - name: originalVoiceId
         in: path
         description: ID of a parent original voice
         required: true
@@ -488,6 +487,7 @@ paths:
           description: A successful response
           schema:
             $ref: '#/definitions/ApiResponse'         
+ 
   /comments:
     post:
       tags:
@@ -595,7 +595,7 @@ paths:
       # security:
       #   - firebase: []
   
-  /comments/original/{voiceId}:
+  /comments/original/{originalVoiceId}:
     get:
       tags:
       - Comments
@@ -604,7 +604,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: voiceId
+      - name: originalVoiceId
         in: path
         description: voice ID
         required: true
@@ -619,7 +619,7 @@ paths:
           schema:
             $ref: '#/definitions/ApiResponse'
             
-  /comments/recorded/{voiceId}:
+  /comments/recorded/{recordedVoiceId}:
     get:
       tags:
       - Comments
@@ -628,7 +628,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: voiceId
+      - name: recordedVoiceId
         in: path
         description: voice ID
         required: true
@@ -676,12 +676,13 @@ definitions:
         description: User Status
     xml:
       name: User
+  
   OriginalVoice:
     type: object
     required:
     - name
     properties:
-      voiceId:
+      originalVoiceId:
         type: integer
         format: int64
       name:
@@ -699,10 +700,10 @@ definitions:
   RecordedVoice:
     type: object
     properties:
-      voiceId:
+      recordedVoiceId:
         type: integer
         format: int64
-      parentId:
+      originalVoiceId:
         type: integer
         format: int64
       voiceUrl:
@@ -719,10 +720,10 @@ definitions:
       id:
         type: integer
         format: int64
-      voiceID:
+      voiceId:
         type: integer
         format: int64
-      userID:
+      userId:
         type: integer
         format: int64
       text:
