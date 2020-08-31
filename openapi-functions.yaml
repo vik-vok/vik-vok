@@ -642,7 +642,50 @@ paths:
           description: A successful response
           schema:
             $ref: '#/definitions/ApiResponse' 
-
+  
+  /statistics/voice:
+    get:
+      tags:
+      - Voice Statistics
+      summary: get statistics for each original voice
+      operationId: getOriginalVoiceStatisticsAll
+      produces:
+      - application/json
+      parameters: []
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/statistics-all-voice-get
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/ApiResponse'  
+            
+  /statistics/voice/{voiceId}:
+    get:
+      tags:
+      - Voice Statistics
+      summary: get statistics for each original voice
+      operationId: getOriginalVoiceStatisticsOne
+      produces:
+      - application/json
+      parameters: 
+      - name: voiceId
+        in: path
+        description: voice ID
+        required: true
+        type: integer
+        format: int64
+        
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/statistics-one-voice-get 
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/ApiResponse'  
+  
 securityDefinitions:
   firebase:
     authorizationUrl: "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[AIzaSyAcXoIXLzqbLBmRlSOlcf5MEKZO_vA2BOE]"
