@@ -317,7 +317,7 @@ paths:
         type: integer
         format: int64
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/voice-original-comments
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/merger-voice-original-comments
         protocol: h2
       responses:
         '200':
@@ -341,7 +341,7 @@ paths:
         type: integer
         format: int654
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/voice-original-voices
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/merger-voice-original-voices
         protocol: h2
       responses:
         '200':
