@@ -653,7 +653,7 @@ paths:
       - application/json
       parameters: []
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/statistics-all-voice-get
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/merger-statistics-voice-all
         protocol: h2
       responses:
         '200':
@@ -678,7 +678,7 @@ paths:
         format: int64
         
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/statistics-one-voice-get 
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/merger-statistics-voice-one
         protocol: h2
       responses:
         '200':
@@ -689,7 +689,7 @@ paths:
   /statistics/user/{userId}:
     get:
       tags:
-      - Voice Statistics
+      - User Statistics
       summary: get user statistics 
       operationId: getUserStatistics
       produces:
@@ -703,7 +703,7 @@ paths:
         format: int64
         
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/statistics-user-get 
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/merger-statistics-user
         protocol: h2
       responses:
         '200':
@@ -747,6 +747,8 @@ definitions:
 
   OriginalVoice:
     type: object
+    required:
+    - name
     properties:
       originalVoiceId:
         type: integer
