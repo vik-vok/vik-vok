@@ -661,7 +661,7 @@ paths:
           schema:
             $ref: '#/definitions/ApiResponse'  
             
-  /statistics/voice/{OriginalVoiceId}:
+  /statistics/voice/{originalVoiceId}:
     get:
       tags:
       - Voice Statistics
@@ -670,7 +670,7 @@ paths:
       produces:
       - application/json
       parameters: 
-      - name: OriginalVoiceId
+      - name: originalVoiceId
         in: path
         description: voice ID
         required: true
@@ -685,6 +685,31 @@ paths:
           description: A successful response
           schema:
             $ref: '#/definitions/ApiResponse'  
+  
+  /statistics/user/{userId}:
+    get:
+      tags:
+      - Voice Statistics
+      summary: get user statistics 
+      operationId: getUserStatistics
+      produces:
+      - application/json
+      parameters: 
+      - name: userId
+        in: path
+        description: user ID
+        required: true
+        type: integer
+        format: int64
+        
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/statistics-user-get 
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/ApiResponse'    
   
 securityDefinitions:
   firebase:
