@@ -661,7 +661,7 @@ paths:
           schema:
             $ref: '#/definitions/ApiResponse'  
             
-  /statistics/voice/{voiceId}:
+  /statistics/voice/{OriginalVoiceId}:
     get:
       tags:
       - Voice Statistics
@@ -670,7 +670,7 @@ paths:
       produces:
       - application/json
       parameters: 
-      - name: voiceId
+      - name: OriginalVoiceId
         in: path
         description: voice ID
         required: true
