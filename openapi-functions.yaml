@@ -722,8 +722,6 @@ definitions:
 
   OriginalVoice:
     type: object
-    required:
-    - name
     properties:
       originalVoiceId:
         type: integer
