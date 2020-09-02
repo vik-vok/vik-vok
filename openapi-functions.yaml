@@ -884,7 +884,7 @@ paths:
       - application/json
         
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/merger-user-voice-recorded-all
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/merger-voice-recorded-all-full
         protocol: h2
       responses:
         '200':
@@ -916,7 +916,7 @@ paths:
         type: integer
         
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/merger-user-voice-recorded-all
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/merger-voice-recorded-single-full
         protocol: h2
       responses:
         '200':
