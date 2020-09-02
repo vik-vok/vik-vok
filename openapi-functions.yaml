@@ -444,7 +444,7 @@ paths:
         '200':
           description: A successful response
           schema:
-            $ref: '#/definitions/ApiResponse'  
+            $ref: '#/definitions/RecordedVoice'  
 
     delete:
       tags:
@@ -928,11 +928,16 @@ definitions:
       originalVoiceId:
         type: integer
         format: int64
-      voiceUrl:
-        type: string
       userId:
         type: integer
         format: int64
+      voiceUrl:
+        type: string
+      filename:
+        type: string
+      created:
+        type: string
+        format: date
     xml:
       name: RecordedVoice
       
