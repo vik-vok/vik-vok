@@ -882,20 +882,14 @@ definitions:
       userId:
         type: integer
         format: int64
-      username:
-        type: string
-      firstName:
-        type: string
-      lastName:
-        type: string
       email:
         type: string
-      password:
+      emailVerified:
+        type: boolean
+      photoUrl:
         type: string
-      userStatus:
-        type: integer
-        format: int32
-        description: User Status
+      username:
+        type: string
     xml:
       name: User
 
@@ -907,13 +901,16 @@ definitions:
       originalVoiceId:
         type: integer
         format: int64
+      avatar:
+        type: string
       name:
         type: string
-      description:
-        type: string
-      voiceUrl:
+      path:
         type: string
       userId:
+        type: integer
+        format: int64
+      views:
         type: integer
         format: int64
     xml:
@@ -944,17 +941,20 @@ definitions:
   Comment:
     type: object
     properties:
-      id:
+      commentId:
+        type: integer
+        format: int64
+      created:
+        type: string
+        format: date
+      text:
+        type: string
+      userId:
         type: integer
         format: int64
       voiceId:
         type: integer
         format: int64
-      userId:
-        type: integer
-        format: int64
-      text:
-        type: string
     xml:
       name: Comment   
       
