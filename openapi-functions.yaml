@@ -512,7 +512,7 @@ paths:
           schema:
             $ref: '#/definitions/ApiResponse'         
 
-  /recordedvoices/{userId}/{originalVoiceId}:      
+  /recordedvoices/original/{originalVoiceId}/{userId}:      
     get:
       tags:
       - Recorded Voices
