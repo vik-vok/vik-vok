@@ -772,7 +772,6 @@ paths:
           schema:
             $ref: '#/definitions/ApiResponse'    
 
-
   /merger/statistics/voice:
     get:
       tags:
@@ -873,6 +872,64 @@ paths:
                       type: array
                       items:
                         $ref: '#/definitions/RecordedVoice'
+                    
+            
+  /merger/voice/original:
+    get:
+      tags:
+      - Merge Voices
+      summary: get original voices with user object
+      operationId: getMergedOriginalVoices
+      produces:
+      - application/json
+        
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/merger-user-voice-recorded-all
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/definitions/OriginalVoice'
+                - type: object
+                  properties:
+                    User:
+                      type: object
+                      $ref: '#/definitions/User'
+                      
+  /merger/voice/original/{originalVoiceId}:
+    get:
+      tags:
+      - Merge Voices
+      summary: get original voices with user object
+      operationId: getMergedOriginalVoiceSingle
+      produces:
+      - application/json
+      parameters:
+      - name: originalVoiceId
+        in: path
+        description: Original Voice ID
+        required: true
+        type: integer
+        
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/merger-user-voice-recorded-all
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: object
+            allOf:
+              - $ref: '#/definitions/OriginalVoice'
+              - type: object
+                properties:
+                  User:
+                    type: object
+                    $ref: '#/definitions/User'
                     
 securityDefinitions:
   firebase:
