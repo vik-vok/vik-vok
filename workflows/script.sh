@@ -6,7 +6,7 @@ cd ${DIR}
 
 # 1
 echo "" > ${TMP_FNAME}
-gcloud endpoints services deploy ../openapi-functions.yaml --project ${PROJECT} > $TMP_FNAME 2> $TMP_FNAME
+gcloud endpoints services deploy ../openapi-functions.yaml --project ${PROJECT} 2>&1 $TMP_FNAME | tee ${TMP_FNAME}
 
 CONFIG_ID=$(cat ${TMP_FNAME}| grep 'Service Configuration' | grep -oP '\[\K[^\]]+' | awk '{i++}i==1' )
 SERVICE=$(cat ${TMP_FNAME}| grep 'Service Configuration' | grep -oP '\[\K[^\]]+' | awk '{i++}i==2' )
@@ -21,7 +21,7 @@ echo "" > ${TMP_FNAME}
 ./gcloud_build_image.sh \
     -s ${SERVICE} \
     -c ${CONFIG_ID} \
-    -p ${PROJECT} >> $TMP_FNAME 2>> $TMP_FNAME
+    -p ${PROJECT} 2>&1 $TMP_FNAME | tee ${TMP_FNAME}
 
 NEW_IMAGE=$(cat ${TMP_FNAME} |  sed -n 's/+ NEW_IMAGE=//p' )
 
