@@ -167,10 +167,10 @@ paths:
         in: path
         description: ID of a user
         required: true
-        type: integer
-        format: int64
+        type: string
+        
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/users-original-voices
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/user-original-voices
         protocol: h2
       responses:
         '200':
