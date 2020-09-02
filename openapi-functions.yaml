@@ -841,29 +841,29 @@ paths:
           schema:
             $ref: '#/definitions/ApiResponse'    
             
-  # /merger/user/{userId}/voices/:
-  #   get:
-  #     tags:
-  #     - Merge User
-  #     summary: get user tried voices
-  #     operationId: getUserTriedVoices
-  #     produces:
-  #     - application/json
-  #     parameters:
-  #     - name: userId
-  #       in: path
-  #       description: userId
-  #       required: true
-  #       type: integer
-  #       format: int64
-  #     x-google-backend:
-  #       address: https://europe-west1-speech-similarity.cloudfunctions.net/merger-user-voice-recorded-all
-  #       protocol: h2
-  #     responses:
-  #       '200':
-  #         description: A successful response
-  #         schema:
-  #           $ref: '#/definitions/ApiResponse'        
+  /merger/user/{userId}/voices/:
+    get:
+      tags:
+      - Merge User
+      summary: get user tried voices
+      operationId: getUserTriedVoices
+      produces:
+      - application/json
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        type: integer
+        format: int64
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/merger-user-voice-recorded-all
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/ApiResponse'        
   
 securityDefinitions:
   firebase:
