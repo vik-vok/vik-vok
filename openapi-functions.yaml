@@ -854,8 +854,7 @@ paths:
         in: path
         description: user ID
         required: true
-        type: integer
-        format: int64
+        type: string
         
       x-google-backend:
         address: https://europe-west1-speech-similarity.cloudfunctions.net/merger-user-voice-recorded-all
