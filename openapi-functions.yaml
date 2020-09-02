@@ -863,8 +863,17 @@ paths:
         '200':
           description: A successful response
           schema:
-            $ref: '#/definitions/ApiResponse'        
-  
+            type: array
+            items:
+              allOf:
+                - $ref: '#/definitions/OriginalVoice'
+                - type: object
+                  properties:
+                    recordedVoices:
+                      type: array
+                      items:
+                        $ref: '#/definitions/RecordedVoice'
+                    
 securityDefinitions:
   firebase:
     authorizationUrl: "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[AIzaSyAcXoIXLzqbLBmRlSOlcf5MEKZO_vA2BOE]"
