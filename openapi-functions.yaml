@@ -519,7 +519,7 @@ paths:
           schema:
             $ref: '#/definitions/ApiResponse'         
 
-  /recordedvoices/{userId}/{originalId}:      
+  /recordedvoices/original/{originalVoiceId}/{userId}:      
     get:
       tags:
       - Recorded Voices
@@ -534,7 +534,7 @@ paths:
         required: true
         type: integer
         format: int654
-      - name: originalId
+      - name: originalVoiceId
         in: path
         description: ID of a user
         required: true
