@@ -22,7 +22,7 @@ paths:
       - application/json
       parameters: []
       x-google-backend:
-        address: https://europe-west1-speech-similarity.cloudfunctions.net/users-get-all
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/user-get-all
         protocol: h2
       responses:
         '200':
