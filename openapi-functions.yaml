@@ -871,8 +871,7 @@ paths:
                     recordedVoices:
                       type: array
                       items:
-                        $ref: '#/definitions/RecordedVoice'
-                    
+                        $ref: '#/definitions/RecordedVoice'     
             
   /merger/voice/original:
     get:
@@ -930,7 +929,33 @@ paths:
                   User:
                     type: object
                     $ref: '#/definitions/User'
-                    
+
+  /challenges:
+    post:
+      tags:
+      - Challenge
+      summary: Add challenge
+      operationId: challengeAdd
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: challenge object
+        required: true
+        schema:
+          $ref: '#/definitions/Challenge'
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/challenge-create
+        protocol: h2
+      responses:
+        "405":
+          description: Invalid input
+      # security:
+      #   - firebase: []
+
 securityDefinitions:
   firebase:
     authorizationUrl: "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[AIzaSyAcXoIXLzqbLBmRlSOlcf5MEKZO_vA2BOE]"
@@ -1022,7 +1047,33 @@ definitions:
         type: integer
         format: int64
     xml:
-      name: Comment   
+      name: Comment  
+      
+  Challenge:
+    type: object
+    properties:
+      challengeId:
+        type: integer
+        format: int64
+      originalVoiceId:
+        type: integer
+        format: int64
+      senderUserId:
+        type: integer
+        format: int64
+      receiverUserId:
+        type: integer
+        format: int64
+      created:
+        type: string
+        format: date
+      accomplished:
+        type: boolean
+      score:
+        type: integer
+        format: int64
+    xml:
+      name: Challenge  
       
   ApiResponse:
     type: object
