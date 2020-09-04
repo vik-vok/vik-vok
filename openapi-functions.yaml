@@ -775,7 +775,7 @@ paths:
   /merger/statistics/voice:
     get:
       tags:
-      - Merge Statistics
+      - Merge
       summary: get merged statistics for each original voice
       operationId: getNergedOriginalVoiceStatisticsAll
       produces:
@@ -793,7 +793,7 @@ paths:
   /merger/statistics/voice/{originalVoiceId}:
     get:
       tags:
-      - Merge Statistics
+      - Merge
       summary: get merged statistics for each original voice
       operationId: getMergedOriginalVoiceStatisticsOne
       produces:
@@ -818,7 +818,7 @@ paths:
   /merger/statistics/user/{userId}:
     get:
       tags:
-      - Merge Statistics
+      - Merge
       summary: get merged user statistics 
       operationId: getMergedUserStatistics
       produces:
@@ -843,7 +843,7 @@ paths:
   /merger/user/{userId}/voices:
     get:
       tags:
-      - Merge User
+      - Merge
       summary: get user tried voices
       operationId: getUserTriedVoices
       produces:
@@ -876,7 +876,7 @@ paths:
   /merger/voice/original:
     get:
       tags:
-      - Merge Voices
+      - Merge
       summary: get original voices with user object
       operationId: getMergedOriginalVoices
       produces:
@@ -902,7 +902,7 @@ paths:
   /merger/voice/original/{originalVoiceId}:
     get:
       tags:
-      - Merge Voices
+      - Merge
       summary: get original voices with user object
       operationId: getMergedOriginalVoiceSingle
       produces:
@@ -930,6 +930,29 @@ paths:
                     type: object
                     $ref: '#/definitions/User'
 
+  /merger/challenges/{receiverUserId}:
+    get:
+      tags:
+      - Merge
+      summary: get challenges for user
+      operationId: getMergedChallengesUserId
+      produces:
+      - application/json
+      parameters:
+      - name: receiverUserId
+        in: path
+        description: user id
+        required: true
+        type: integer
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/merger-challenge-user
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: object
+
   /challenges:
     post:
       tags:
@@ -956,13 +979,36 @@ paths:
       # security:
       #   - firebase: []
 
+  /challenges/{receiverUserId}:
+    get:
+      tags:
+      - Challenge
+      summary: get challenges for user
+      operationId: getChallengesUserId
+      produces:
+      - application/json
+      parameters:
+      - name: receiverUserId
+        in: path
+        description: user id
+        required: true
+        type: integer
+      x-google-backend:
+        address: https://europe-west1-speech-similarity.cloudfunctions.net/challenge-get
+        protocol: h2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: object
+            
 securityDefinitions:
   firebase:
     authorizationUrl: "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[AIzaSyAcXoIXLzqbLBmRlSOlcf5MEKZO_vA2BOE]"
     flow: "implicit"
     type: "oauth2"
     # Replace YOUR-PROJECT-ID with your project ID
-    x-google-issuer: "https://securetoken.google.com/YOUR-PROJECT-ID"
+    x-google-issuer: "https://securetoken.google.com/speech-similarity"
     x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/metadata/x509/securetoken@system.gserviceaccount.com"
     x-google-audiences: speech-similarity
 
@@ -1071,7 +1117,7 @@ definitions:
         type: boolean
       score:
         type: integer
-        format: int64
+        format: float32
     xml:
       name: Challenge  
       
